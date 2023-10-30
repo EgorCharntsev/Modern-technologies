@@ -43,8 +43,9 @@
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.slf4j</groupId>
