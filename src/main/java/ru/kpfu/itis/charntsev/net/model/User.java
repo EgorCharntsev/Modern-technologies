@@ -7,20 +7,23 @@ public class User {
     private String lastname;
     private String login;
     private String password;
+    private String photo;
 
-    public User(String name, String lastname, String login, String password) {
+    public User(String name, String lastname, String login, String password, String photo) {
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.password = password;
+        this.photo = photo;
     }
 
-    public User(int id, String name, String lastname, String login, String password) {
+    public User(int id, String name, String lastname, String login, String password, String photo) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.login = login;
         this.password = password;
+        this.photo = photo;
     }
 
     public String getPassword() {
@@ -61,5 +64,13 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

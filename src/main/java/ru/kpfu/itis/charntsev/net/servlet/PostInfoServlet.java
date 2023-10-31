@@ -11,22 +11,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet(name="homeServlet", urlPatterns="/estore_home")
-public class HomePageServlet extends HttpServlet {
-
+@WebServlet(name = "postInfoServlet", urlPatterns = "/post_info")
+public class PostInfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DecorationPagesUtil.setTitle(req, "Home page");
+        DecorationPagesUtil.setTitle(req, "Post info");
         PostDaoImpl postDao = new PostDaoImpl();
         try {
-            List<PostDto> posts = postDao.getAllDto();
-            req.setAttribute("posts", posts);
-            getServletContext().getRequestDispatcher("/view/home.jsp").forward(req,resp);
+            PostDto postDto = postDao.getDto(Integer.parseInt(req.getParameter("id")));
+            req.setAttribute("post", postDto);
+            req.getRequestDispatcher("/view/post_info.jsp").forward(req,resp);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
