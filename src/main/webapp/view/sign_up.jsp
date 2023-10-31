@@ -1,9 +1,9 @@
 <<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ include file="header.jsp"%>>
+<%@ include file="../pattern/header.jsp"%>>
 
 <div class="index">
     <h1 class="index_title">Registration page</h1>
-    <form action = "registration" method="post">
+    <form action = "/registration" method="post">
         <div class="index_content">
             Enter your name:
             <input class="field" type = "text" name = "name"/><br><br>
@@ -28,7 +28,7 @@
             <input class="field" type = "password" name = "password2"/><br><br>
         </div>
         <div class="index_content">
-            <input class="sign_btn" type = "submit" value="Complete registration!"/><br>
+            <input class="btn" type = "submit" value="Complete registration!"/><br>
         </div>
         <div class="index_content">
             <a href="sign_in.jsp" class="index_desc"><em>Already registered? Sign in.</em></a>
@@ -36,4 +36,4 @@
     </form>
 </div>
 
-<%@ include file="footer.jsp"%>
+<%@ include file="../pattern/footer.jsp"%>
