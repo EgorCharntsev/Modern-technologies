@@ -11,14 +11,35 @@ import java.util.List;
 public class UserDaoImpl implements UserDao<User> {
 
     public final Connection connection = DatabaseConnectionUtil.getConnection();
-    private final String SQL_SAVE = "INSERT INTO users(name, lastname, login, password) VALUES (?,?,?,?)";
+    private final String SQL_SAVE = "INSERT INTO users(name, lastname, login, password, photo) VALUES (?,?,?,?,?)";
     private final String SQL_GET_BY_ID = "SELECT * FROM users WHERE id = ?";
     private final String SQL_GET_BY_LOGIN_AND_PASS = "SELECT * FROM users WHERE login = ? AND password = ?";
     private final String SQL_GET_ALL = "SELECT * FROM users";
+    private final String SQL_UPDATE = "UPDATE users SET name = ?, lastname = ?, login = ?, password = ? WHERE id = ?";
 
     @Override
     public User get(int id) {
-        return null;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_GET_BY_ID);
+
+            preparedStatement.setInt(1,id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            User user = null;
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("lastname"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password"),
+                        resultSet.getString("photo"));
+            }
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -38,7 +59,8 @@ public class UserDaoImpl implements UserDao<User> {
                         resultSet.getString("name"),
                         resultSet.getString("lastname"),
                         resultSet.getString("login"),
-                        resultSet.getString("password"));
+                        resultSet.getString("password"),
+                        resultSet.getString("photo"));
 
             }
             return user;
@@ -63,7 +85,8 @@ public class UserDaoImpl implements UserDao<User> {
                                     resultSet.getString("name"),
                                     resultSet.getString("lastname"),
                                     resultSet.getString("login"),
-                                    resultSet.getString("password")));
+                                    resultSet.getString("password"),
+                                    resultSet.getString("photo")));
                 }
             }
             return users;
@@ -81,6 +104,7 @@ public class UserDaoImpl implements UserDao<User> {
             preparedStatement.setString(2, user.getLastname());
             preparedStatement.setString(3, user.getLogin());
             preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(5, user.getPhoto());
 
             preparedStatement.executeUpdate();
 
@@ -89,6 +113,23 @@ public class UserDaoImpl implements UserDao<User> {
             if (keygen.next()) {
                 user.setId(keygen.getInt("id"));
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void update(int id, User user) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getLastname());
+            preparedStatement.setString(3, user.getLogin());
+            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setInt(5,id);
+
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
