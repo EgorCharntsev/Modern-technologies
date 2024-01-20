@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{$title_page}</title>
+  <title><%=request.getAttribute("title_page")%></title>
   <link href="../css/style.css" rel="stylesheet">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>

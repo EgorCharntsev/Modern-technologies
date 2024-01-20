@@ -25,7 +25,7 @@
                         </div>
                         <br>
                         <div>
-                            <a class="logo_text_h2">Product Info:</a><%=postDto.getText()%>
+                            <a class="logo_text_h2">Product Info: </a><%=postDto.getText()%>
                         </div>
                     </div>
                 </div>

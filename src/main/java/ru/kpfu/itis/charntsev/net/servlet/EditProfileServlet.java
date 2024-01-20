@@ -67,7 +67,6 @@ public class EditProfileServlet extends HttpServlet {
             resp.addCookie(cookie);
         }
 
-        // db
         userDao.update(user.getId(), user);
 
         resp.sendRedirect("/profile");

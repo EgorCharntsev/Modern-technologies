@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="footer_bottom">
-        &copy; EVivo. All rights reserved.
+        &copy; EStore. All rights reserved.
     </div>
 </footer>
 

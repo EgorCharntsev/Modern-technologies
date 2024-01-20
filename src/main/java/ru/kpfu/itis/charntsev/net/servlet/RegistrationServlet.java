@@ -62,6 +62,7 @@ public class RegistrationServlet extends HttpServlet {
                 cookies.add(new Cookie("phone", user.getLogin()));
                 cookies.add(new Cookie("password", user.getPassword()));
                 cookies.add(new Cookie("photo", user.getPhoto()));
+
                 for (Cookie cookie : cookies) {
                     cookie.setMaxAge(24 * 60 * 60);
                     resp.addCookie(cookie);
